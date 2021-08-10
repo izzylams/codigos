@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int main()
+{
+    int N;
+    cin >> N;
+    int Q[N];
+    int a = 0;
+    
+    for (int i = 1; i <= N; i++){
+        cin >> Q[i];
+    }
+    
+    for (int i = 1; i <= N; i++){
+        if (Q[i] == -1){
+            while (Q[i] == -1){
+                a++;
+                if (i-a <= 0){
+                    if (Q[i+a] == 0){
+                        Q[i] = a;
+                    }
+                }
+                else if (i+a > N){
+                    if (Q[i-a] == 0){
+                        Q[i] = a;
+                    }
+                }
+                else{
+                    if (Q[i+a] == 0 || Q[i-a] == 0){
+                        Q[i] = a;
+                    }
+                }
+            }
+            a = 0;
+        }   
+    }
+    
+    for (int i = 1; i <= N; i++){
+        if (Q[i] > 9){
+            Q[i] = 9;
+        }
+        printf ("%d", Q[i]);
+        if (i != N){
+            printf (" ");
+        }
+        else{
+            printf ("\n");
+        }
+    }
+
+    return 0;
+}
